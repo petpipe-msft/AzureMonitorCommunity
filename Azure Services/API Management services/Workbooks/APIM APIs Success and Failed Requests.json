@@ -1,0 +1,81 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "// Number of calls by APIs \r\n// View the number of calls per API in the last xyz timerange. \r\n//Calls by API ID with success and failures\r\nApiManagementGatewayLogs\r\n| where TimeGenerated > ago(30d)\r\n| summarize FailedRequest = count(IsRequestSuccess == false), SuccessfulRequest = count(IsRequestSuccess) by ApiId",
+        "size": 0,
+        "title": "APIs in APIM with success and failures",
+        "color": "green",
+        "timeContext": {
+          "durationMs": 2592000000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "/subscriptions/81782e84-cc1b-451f-acce-9d471d2976b4/resourceGroups/root-sharedsvcs-rg/providers/Microsoft.OperationalInsights/workspaces/Core-CUS-LA"
+        ],
+        "visualization": "categoricalbar",
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "ApiId",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "FailedRequest",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "ApiId",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "FailedRequest",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "chartSettings": {
+          "seriesLabelSettings": [
+            {
+              "seriesName": "FailedRequest",
+              "color": "redBright"
+            },
+            {
+              "seriesName": "SuccessfulRequest",
+              "color": "gray"
+            }
+          ]
+        }
+      },
+      "showPin": true,
+      "name": "APIM APIs with failed and success requests"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
